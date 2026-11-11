@@ -88,6 +88,12 @@ class DetallePedidoInline(admin.TabularInline):
     # No mostrar filas vacías adicionales.
     extra = 0
 
+    # Campos que se visualizarán.
+    fields = (
+        "producto",
+        "cantidad",
+        "precio_unitario",
+    )
 
 # =========================================================
 # ADMINISTRACIÓN DE PEDIDOS
@@ -126,13 +132,17 @@ class PedidoAdmin(admin.ModelAdmin):
 @admin.register(DetallePedido)
 class DetallePedidoAdmin(admin.ModelAdmin):
 
+    # Columnas visibles.
     list_display = (
         "pedido",
         "producto",
         "cantidad",
+        "precio_unitario",
     )
 
+    # Campos que pueden buscarse.
     search_fields = (
         "producto__nombre",
         "pedido__usuario__username",
     )
+
